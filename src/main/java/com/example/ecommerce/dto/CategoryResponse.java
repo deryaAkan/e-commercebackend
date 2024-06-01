@@ -1,4 +1,4 @@
 package com.example.ecommerce.dto;
 
-public record CategoryResponse() {
+public record CategoryResponse(String title) {
 }

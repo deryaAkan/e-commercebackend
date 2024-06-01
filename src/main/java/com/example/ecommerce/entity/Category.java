@@ -25,4 +25,10 @@ public class Category {
     @JsonIgnoreProperties("category")
     private List<Product> productList;
 
+    public String getTitle() {
+        return title;
+    }
+    public List<Product> getProductList() {
+        return productList;
+    }
 }

@@ -19,8 +19,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
+    public ProductResponse saveProduct(Product product) {
+        Product savedProduct = productRepository.save(product);
+        return new ProductResponse(savedProduct.getName(),savedProduct.getCategory().getTitle());
     }
 
     @Override
@@ -33,9 +34,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> productOptional = productRepository.findByName(name);
         if(productOptional.isPresent()){
             Product product = productOptional.get();
-            return new ProductResponse(product.getName());
+            return new ProductResponse(product.getName(), product.getCategory().getTitle());
         }
-        return null;
+        return null; //TODO burada normalde throw exception yazmam lazım
     }
 
     @Override
