@@ -27,15 +27,27 @@ public class ProductController {
         return productService.saveProduct(product);
 
     }
-    @PostMapping("/category_id")
-    public ProductResponse saveProduct(@PathVariable long category_id,
-                                       @RequestBody Product product){
-         Category category = categoryService.findCategoryById(category_id);
-         product.setCategory(category);
-         category.getProductList().add(product);
+//    @PostMapping("/category_id")
+//    public ProductResponse saveProduct(@PathVariable long category_id,
+//                                       @RequestBody Product product){
+//         Category category = categoryService.findCategoryById(category_id);
+//         product.setCategory(category);
+//         category.getProductList().add(product);
+//         return productService.saveProduct(product);
+//    }
 
-         return productService.saveProduct(product);
+    @PostMapping("/category/{category_id}")
+    public ProductResponse addProductToCategory(@PathVariable("category_id") long categoryId,
+                                                @RequestBody Product product) {
+        Category category = categoryService.findCategoryById(categoryId);
+        if (category == null) {
+            throw new IllegalArgumentException("Category not found");
+        }
+        product.setCategory(category);
+        category.getProductList().add(product);
+        return productService.saveProduct(product);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
