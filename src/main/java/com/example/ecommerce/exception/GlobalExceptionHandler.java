@@ -12,15 +12,15 @@ import java.time.Instant;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(CategoryException categoryException){
-        ErrorResponse errorResponse = new ErrorResponse(categoryException.getMessage(), Instant.now());
-        return new ResponseEntity<>(errorResponse, categoryException.getStatus());
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(NotFoundException NotFoundException){
+        ErrorResponse errorResponse = new ErrorResponse(NotFoundException.getMessage(), Instant.now());
+        return new ResponseEntity<>(errorResponse, NotFoundException.getStatus());
     }
 
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleResourceNotFoundException(Exception exception){
         ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), Instant.now());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 }

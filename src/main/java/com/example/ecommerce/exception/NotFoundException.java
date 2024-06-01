@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
 @Getter
-public class CategoryException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
     private HttpStatus httpStatus;
-    public CategoryException(String message, HttpStatus httpStatus) {
+    public NotFoundException(String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
     }

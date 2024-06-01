@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.time.Instant;
 
-@AllArgsConstructor
-@Data
 public class ErrorResponse {
     private String message;
     private Instant timestamp;
@@ -13,5 +11,13 @@ public class ErrorResponse {
     public ErrorResponse(String message, Instant timestamp) {
         this.message = message;
         this.timestamp = timestamp;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
     }
 }

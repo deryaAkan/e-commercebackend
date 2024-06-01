@@ -3,8 +3,10 @@ package com.example.ecommerce.service;
 import com.example.ecommerce.dto.ProductResponse;
 import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.exception.NotFoundException;
 import com.example.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
             Product product = productOptional.get();
             return new ProductResponse(product.getName(), product.getCategory().getTitle());
         }
-        return null; //TODO burada normalde throw exception yazmam lazım
+        else throw new NotFoundException("Product not found with name:" + name, HttpStatus.NOT_FOUND);
     }
 
     @Override

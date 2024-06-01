@@ -1,9 +1,10 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.dto.CategoryResponse;
 import com.example.ecommerce.entity.Category;
+import com.example.ecommerce.exception.NotFoundException;
 import com.example.ecommerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,8 +49,7 @@ public class CategoryServiceImpl implements CategoryService{
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if(categoryOptional.isPresent()) {
             return categoryOptional.get();
-
         }
-        return null; //TODO burada throw exception ypılacak
+        else throw new NotFoundException("Category not found with id: " + id, HttpStatus.NOT_FOUND);
     }
 }
