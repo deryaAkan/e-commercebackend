@@ -31,4 +31,7 @@ public class Product {
     private Integer sellCount;
     private String[] images;
 
+    public String getName() {
+        return name;
+    }
 }

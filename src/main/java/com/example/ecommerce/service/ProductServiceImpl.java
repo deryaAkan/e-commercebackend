@@ -1,5 +1,6 @@
 package com.example.ecommerce.service;
 
+import com.example.ecommerce.dto.ProductResponse;
 import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.repository.ProductRepository;
@@ -28,8 +29,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProductByName(String name) {
-        return productRepository.findByName(name);
+    public ProductResponse getProductByName(String name) {
+        Optional<Product> productOptional = productRepository.findByName(name);
+        if(productOptional.isPresent()){
+            Product product = productOptional.get();
+            return new ProductResponse(product.getName());
+        }
+        return null;
     }
 
     @Override
