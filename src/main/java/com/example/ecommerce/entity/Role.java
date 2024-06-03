@@ -10,9 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Table(name = "role", schema = "ecommerce")
 public class Role implements GrantedAuthority {
     @Id
@@ -20,11 +17,44 @@ public class Role implements GrantedAuthority {
     private Long id;
     private String name;
     private String code;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @ManyToMany(mappedBy = "roles")
     @JsonIgnoreProperties("roles")
     private List<User> users;
     @Override
     public String getAuthority() {
-        return null;
+        return this.name;
     }
 }
