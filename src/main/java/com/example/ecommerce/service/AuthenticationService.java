@@ -29,7 +29,7 @@ public class AuthenticationService {
         }
 
         String encodedPassword = passwordEncoder.encode(password);
-        Optional<Role> userRoleOpt = roleRepository.findByAuthority("USER");
+        Optional<Role> userRoleOpt = roleRepository.findByName("USER");
 
         if (userRoleOpt.isEmpty()) {
             throw new IllegalStateException("USER role not found");

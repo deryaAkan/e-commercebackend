@@ -20,12 +20,12 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        if (roleRepository.findByAuthority("USER").isEmpty()) {
+        if (roleRepository.findByName("USER").isEmpty()) {
             Role userRole = new Role();
             userRole.setName("USER");
             roleRepository.save(userRole);
         }
-        if (roleRepository.findByAuthority("ADMIN").isEmpty()) {
+        if (roleRepository.findByName("ADMIN").isEmpty()) {
             Role adminRole = new Role();
             adminRole.setName("ADMIN");
             roleRepository.save(adminRole);
